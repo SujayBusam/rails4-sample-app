@@ -5,7 +5,6 @@ describe "StaticPages" do
 	let(:base_title) { "Ruby on Rails Tutorial Sample App" }
   subject { page }
 
-	# Strings in describe could be anything. Rspec doesn't
   describe "Home page" do
     before { visit root_path }
     
@@ -34,5 +33,5 @@ describe "StaticPages" do
     it { should have_selector('h1', :text => 'Contact') }
     it { should have_title("#{base_title} | Contact") }
   end
-  
+
 end
