@@ -16,6 +16,10 @@ describe User do
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:authenticate) }
 
+  # permanent identifier
+  it { should respond_to(:remember_token) }
+
+  # Sanity check
 	it { should be_valid }
 
   ###### NAME #######
@@ -92,5 +96,14 @@ describe User do
   		it { should_not eq user_for_invalid_password }
   		specify { expect(user_for_invalid_password).to be_false }
   	end
+  end
+
+  ###### AUTHENTICATION #######
+  describe "remember_token" do
+    before { @user.save }
+
+    # Equivalent to 
+    # specify { expect(@user.remember_token).not_to be_blank }
+    its(:remember_token) { should_not be_blank }
   end
 end
