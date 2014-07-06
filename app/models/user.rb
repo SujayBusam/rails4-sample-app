@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 	before_save { self.email = email.downcase }
 
+  has_many :microposts, dependent: :destroy
+
   # This is a method reference. Rails looks for method called create_remember_token
   # and runs it before saving the user
   before_create :create_remember_token
@@ -20,6 +22,10 @@ class User < ActiveRecord::Base
 	# added by has_secure_password
 	validates :password, length: { minimum: 6 }
 
+  def feed
+    # Preliminary
+    self.microposts
+  end
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64
